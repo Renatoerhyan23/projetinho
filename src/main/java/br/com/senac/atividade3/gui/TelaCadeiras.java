@@ -79,7 +79,7 @@ public TelaCadeiras(int id) {
         Botoes.setLayout(BotoesLayout);
         BotoesLayout.setHorizontalGroup(
             BotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         BotoesLayout.setVerticalGroup(
             BotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,27 +129,29 @@ public TelaCadeiras(int id) {
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnVoltar)
-                                .addGap(46, 46, 46)
+                                .addGap(43, 43, 43)
                                 .addComponent(jLabel2))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(78, 78, 78)
+                                .addGap(81, 81, 81)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 94, Short.MAX_VALUE))
-                    .addComponent(Botoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Botoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -304,7 +306,18 @@ for (Component component : components) {
         catch (NoResultException e) { ocupada = false; } }    
     finally { em.close(); }
     
-        button.setEnabled(!ocupada); 
+        if(ocupada) { button.setBackground(new Color (255,51,51)); }
+        else { button.setBackground(new Color(51,255,51)); }
+        if (ocupada) {
+        ActionListener[] actionListeners = button.getActionListeners();
+        for (ActionListener listener : actionListeners) {
+            button.removeActionListener(listener);
+        }
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Está cadeira já está ocupada!");
+            } }); }
     }
 } } 
 }

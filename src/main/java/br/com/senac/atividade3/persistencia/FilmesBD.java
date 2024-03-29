@@ -10,8 +10,7 @@ import javax.swing.JOptionPane;
 
 public class FilmesBD {
     public void cadastrar(Filmes f, int conf) {
-     EntityManager em = JPAUtil.getEntityManager();
-     String textoQuery = "SELECT titulo FROM Filmes WHERE titulo = :titulo";
+     EntityManager em = JPAUtil.getEntityManager();     
      switch(conf) {
             case 1 -> {
                 f.setTitulo(f.getTitulo() + " - Dublado, 3D e D-BOX");
@@ -37,6 +36,7 @@ public class FilmesBD {
             case 24 -> {    
                 f.setTitulo(f.getTitulo() + " - Legendado");
                 f.setTipo("Legendado");    } }
+     String textoQuery = "SELECT titulo FROM Filmes WHERE titulo = :titulo";
 try{em.getTransaction().begin();
     TypedQuery<String> query = em.createQuery(textoQuery, String.class);    
     query.setParameter("titulo", f.getTitulo());     

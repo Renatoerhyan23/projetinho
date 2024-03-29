@@ -2,6 +2,7 @@ package br.com.senac.atividade3.gui;
 
 import br.com.senac.atividade3.persistencia.*;
 import jakarta.persistence.EntityManager;
+import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -51,6 +52,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setTitle("CENAFLIX");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 102, 255));
         jLabel1.setText("CENAFLIX");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

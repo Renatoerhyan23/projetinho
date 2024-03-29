@@ -1,6 +1,7 @@
 br\com\senac\atividade3\gui\TelaEscolha$3.class
 br\com\senac\atividade3\gui\TelaInicial.class
 br\com\senac\atividade3\gui\TelaCadastrar.class
+br\com\senac\atividade3\gui\TelaCadeiras$6.class
 br\com\senac\atividade3\gui\TelaSala$2.class
 br\com\senac\atividade3\persistencia\Cadeiras.class
 br\com\senac\atividade3\gui\TelaCadastrar$2.class

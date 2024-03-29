@@ -5,7 +5,11 @@
 package br.com.senac.atividade3.gui;
 
 import br.com.senac.atividade3.persistencia.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -260,16 +264,29 @@ public class TelaCadastrar extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         UsuarioBD usuariosBD = new UsuarioBD();
         Usuario u = new Usuario();   
-        try {
+        EntityManager em = JPAUtil.getEntityManager();
+        
+try {
         if (!txtNome.getText().trim().isEmpty() || !txtLogin.getText().trim().isEmpty() || !txtSenha.getText().trim().isEmpty()) {
         if (!radioUsuario.isSelected() && !radioOperador.isSelected() && !radioAdm.isSelected()) { radioUsuario.setSelected(true); }
-         String tipo = ""; if ( radioUsuario.isSelected() ) { tipo = "Usuário"; } if ( radioOperador.isSelected() ) { tipo = "Operador"; } if ( radioAdm.isSelected() ) { tipo = "Administrador"; }
-         u.setNome(txtNome.getText().trim());
-         u.setLogin(txtLogin.getText().trim());
-         u.setSenha(usuariosBD.getMD5Hash(txtSenha.getText().trim()));
-         u.setTipo(tipo);
-         usuariosBD.cadastrar(u);
-        } } catch (NoSuchAlgorithmException a) {}
+    String tipo = ""; if ( radioUsuario.isSelected() ) { tipo = "Usuário"; } if ( radioOperador.isSelected() ) { tipo = "Operador"; } if ( radioAdm.isSelected() ) { tipo = "Administrador"; }
+    u.setNome(txtNome.getText().trim());
+    u.setLogin(txtLogin.getText().trim());
+    u.setSenha(usuariosBD.getMD5Hash(txtSenha.getText().trim()));
+    u.setTipo(tipo);
+         
+    String textoQuery = "SELECT login FROM Usuario WHERE login = :login";
+    TypedQuery<String> query = em.createQuery(textoQuery, String.class);    
+    query.setParameter("login", txtLogin.getText());     
+    query.getSingleResult();     
+    
+    JOptionPane.showMessageDialog(null, "Login já cadastrado! Informe outro.");   
+ } else { JOptionPane.showMessageDialog(null, "Preencha todos os campos."); }
+} catch (NoResultException o) { usuariosBD.cadastrar(u); }
+     catch (NoSuchAlgorithmException a) {} 
+     catch(Exception e){ em.getTransaction().rollback(); throw e; }  
+        
+    finally{ JPAUtil.closeEtityManager(); }         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void radioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioUsuarioActionPerformed
