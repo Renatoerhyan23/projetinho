@@ -2,7 +2,6 @@ package br.com.senac.atividade3.gui;
 
 import br.com.senac.atividade3.persistencia.*;
 import jakarta.persistence.EntityManager;
-import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -180,7 +179,7 @@ public class TelaInicial extends javax.swing.JFrame {
        TelaListagem TL = new TelaListagem();
        
        switch (usuario.getTipo()) {
-        case "Usuário": conf = 0; TL.setVisible(true);  dispose(); break;
+        case "Usuário": conf = 0; TL.setVisible(true); dispose(); break;
         case "Operador": conf = 1; TS.setVisible(true); dispose(); break;
         case "Administrador": conf = 2; TS.setVisible(true);  dispose();  break;
        }   }       

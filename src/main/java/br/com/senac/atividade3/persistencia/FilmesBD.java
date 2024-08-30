@@ -86,7 +86,7 @@ public void encerrar(int id){
           if(f != null){
           em.getTransaction().begin();
 
-          TypedQuery<Integer> query = em.createQuery("SELECT s.id FROM Salas s WHERE s.id_filmes = :id)", Integer.class);
+          TypedQuery<Integer> query = em.createQuery("SELECT s.id FROM Salas s WHERE s.id_filmes = :id", Integer.class);
           query.setParameter("id", id);
           List<Integer> listaIds = query.getResultList();
           
